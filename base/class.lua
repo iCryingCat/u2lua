@@ -1,4 +1,4 @@
-require("Lua/u2lua/base/type")
+require("u2lua/base/type")
 
 _C = {}
 _G._C = _C
