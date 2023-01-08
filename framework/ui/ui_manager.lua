@@ -1,34 +1,32 @@
-_C.UIManager = {}
-UIManager = __Class__(_C.UIManager)
+require 'u2lua/framework/lib/res_manager'
 
-local UI_ROOT_PATH = "Res/UI/Prefab/"
+_CLS.UIManager = {}
+UIManager = __Class(_CLS.UIManager)
 
-local LoadUIResource = function(path)
-    local uipath = UI_ROOT_PATH .. path
-    return ResManager.LoadPrefab(uipath)
-end
-
-local LoadUI = function(view)
+local LoadUIGO = function(view)
     local uiPath = view.BindingPath()
-    local uiPref = LoadUIResource(uiPath)
-    local uiGO = ResourceManager.Instantiate(uiPref)
+    local uiPref = ResManager.LoadUI(uiPath)
+    local uiGO = ResManager.Instantiate(uiPref)
     return uiGO;
 end
 
 UIManager.BindGO = function(ui, go)
+    local container = go:GetComponent(typeof(UIContainer))
+    ui.uiContainer = container
     ui.gameObject = go
     ui.transform = go.transform
     ui:Load()
 end
 
 UIManager.New = function(view)
-    local uiGO = LoadUI(view)
-    local ui = view:__New__()
+    local uiGO = LoadUIGO(view)
+    local ui = view:__New()
     UIManager.BindGO(ui, uiGO)
     return ui
 end
 
 UIManager.Show = function(view)
     local ui = UIManager.New(view)
+    ui:Show()
     return ui
 end

@@ -1,2 +1,2 @@
-_C.AtlasManager = {}
-AtlasManager = __Class__(_C.AtlasManager)
+_CLS.AtlasManager = {}
+AtlasManager = __Class(_CLS.AtlasManager)

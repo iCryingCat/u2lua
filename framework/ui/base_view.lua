@@ -1,22 +1,22 @@
-_C.BaseView = {}
-BaseView = __Class__(_C.BaseView)
+_CLS.BaseView = {}
+BaseView = __Class(_CLS.BaseView)
 BaseView.uiContainer = nil
 BaseView.gameObject = nil
 BaseView.transform = nil
 
 function BaseView:Load()
-    self:OnBindUGUI()
+    self:BindVars()
     self:OnBindEvents()
     self:OnLoaded()
 end
 
 function BaseView:Show()
-    self.gameObject.SetActive(true)
+    self.gameObject:SetActive(true)
     self:OnShowed()
 end
 
 function BaseView:Hide()
-    self.gameObject.SetActive(false)
+    self.gameObject:SetActive(false)
     self:OnHided()
 end
 
@@ -30,12 +30,13 @@ function BaseView:Dispose()
     self:OnDisposed()
 end
 
-function BaseView:BindingPath() end
-function BaseView:OnBindUGUI(index)
-    return self.uiContainer:GetComponent(index).component
+function BaseView:GetVar(index)
+    return self.uiContainer:GetVar(index).component
 end
 
-function BaseView:OnBindBaseView()
+function BaseView:BindingPath() end
+
+function BaseView:BindVars()
 
 end
 

@@ -1,17 +1,17 @@
 require("u2lua/base/type")
 
-_C = {}
-_G._C = _C
+_CLS = {}
+_G._CLS = _CLS
 
-__Class__ = function(_c)
+__Class = function(_c)
     if _c.__type then
         error("类型：" .. _c .. "已定义！")
     end
     local class = _c
     class.__type = __Type__
-    function class:__Ctor__(...) end
+    function class:__Ctor(...) end
 
-    function class:__Extends__(baseType)
+    function class:__Extends(baseType)
         if type(baseType) ~= "table" then
             error("基类：" .. baseType .. "不是table类型！")
         end
@@ -26,7 +26,7 @@ __Class__ = function(_c)
         return class
     end
 
-    function class:__New__(...)
+    function class:__New(...)
         local obj = {}
         for k, v in pairs(self) do
             obj[k] = v
@@ -34,7 +34,7 @@ __Class__ = function(_c)
         obj.__index = class
         setmetatable(obj, class)
 
-        obj:__Ctor__(...)
+        obj:__Ctor(...)
         return obj
     end
 
