@@ -1,13 +1,13 @@
 require("u2lua/base/type")
+require("u2lua/base/object")
 
 _CLS = {}
-_G._CLS = _CLS
 
-__Class = function(_c)
-    if _c.__type then
-        error("类型：" .. _c .. "已定义！")
+__Class = function(t)
+    if t.__type == __Type__ then
+        error("类型：" .. t .. "已定义！")
     end
-    local class = _c
+    local class = t
     class.__type = __Type__
     function class:__Ctor(...) end
 
@@ -20,24 +20,19 @@ __Class = function(_c)
             error("基类：" .. baseType .. "未定义！")
         end
 
-        class.base = baseType
-        class.__index = baseType
+        self.base = baseType
+        self.__index = baseType
         setmetatable(class, baseType)
         return class
     end
 
     function class:__New(...)
-        local obj = {}
-        for k, v in pairs(self) do
-            obj[k] = v
-        end
-        obj.__index = class
-        setmetatable(obj, class)
-
+        local obj = __Object__.__Clone(self)
         obj:__Ctor(...)
         return obj
     end
 
+    _CLS[class] = #_CLS
     class.__index = class
     setmetatable(class, {})
     return class

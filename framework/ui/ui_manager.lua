@@ -1,34 +1,37 @@
 require 'u2lua/framework/lib/res_manager'
 
-_CLS.UIManager = {}
-UIManager = __Class(_CLS.UIManager)
+UIManager = {}
+local property = __Class(UIManager)
 
-local LoadUIGO = function(view)
+property.LoadUIGO = function(view)
     local uiPath = view.pathAsset
     local uiPref = ResManager.LoadUI(uiPath)
     local uiGO = ResManager.Instantiate(uiPref)
     return uiGO;
 end
 
-UIManager.BindGO = function(ui, go)
-    print(go)
+property.BindGO = function(ui, go)
     local controller = go:GetComponent(typeof(UIEntityController))
-    print(controller)
     ui.controller = controller
     ui.gameObject = go
     ui.transform = go.transform
+    print("BindGO", ui)
     ui:Load()
 end
 
-UIManager.New = function(uiUnit)
-    local uiGO = LoadUIGO(uiUnit)
+property.New = function(uiUnit)
+    local uiGO = property.LoadUIGO(uiUnit)
+    print("New", uiGO)
     local ui = uiUnit:__New()
-    UIManager.BindGO(ui, uiGO)
+    print("New", ui)
+    property.BindGO(ui, uiGO)
     return ui
 end
 
-UIManager.Show = function(uiUnit)
-    local ui = UIManager.New(uiUnit)
+property.Show = function(uiUnit)
+    print("Show", uiUnit)
+    local ui = property.New(uiUnit)
+    print("Show", ui)
     ui:Show()
     return ui
 end

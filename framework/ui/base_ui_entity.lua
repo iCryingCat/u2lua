@@ -1,51 +1,50 @@
-_CLS.BaseUIEntity = {}
-BaseUIEntity = __Class(_CLS.BaseUIEntity)
-BaseUIEntity.controller = nil
-BaseUIEntity.gameObject = nil
-BaseUIEntity.transform = nil
--- BaseUIEntity.pathAsset = error("未绑定预制体资源")
+BaseUIEntity = {}
+local property = __Class(BaseUIEntity)
+property.controller = nil
+property.gameObject = nil
+property.transform = nil
 
-function BaseUIEntity:Load()
+function property:Load()
     self:BindComponentUnits()
     self:OnBindEvents()
     self:OnLoaded()
 end
 
-function BaseUIEntity:Show()
+function property:Show()
     self.gameObject:SetActive(true)
     self:OnShowed()
 end
 
-function BaseUIEntity:Hide()
+function property:Hide()
     self.gameObject:SetActive(false)
     self:OnHided()
 end
 
-function BaseUIEntity:Close()
+function property:Close()
     self:Hide()
     self:OnClosed()
 end
 
-function BaseUIEntity:Dispose()
+function property:Dispose()
     self:Close()
     self:OnDisposed()
 end
 
-function BaseUIEntity:GetComponentUnit(index)
+function property:GetComponentUnit(index)
     return self.controller:GetComponentUnit(index).component
 end
 
-function BaseUIEntity:BindComponentUnits() end
+function property:BindComponentUnits() end
 
 -- ui生命周期函数
-function BaseUIEntity:OnBindEvents() end
+function property:OnBindEvents() end
 
-function BaseUIEntity:OnLoaded() end
+function property:OnLoaded() end
 
-function BaseUIEntity:OnShowed() end
+function property:OnShowed() end
 
-function BaseUIEntity:OnHided() end
+function property:OnHided() end
 
-function BaseUIEntity:OnClosed() end
+function property:OnClosed() end
 
-function BaseUIEntity:OnDisposed() end
+function property:OnDisposed() end

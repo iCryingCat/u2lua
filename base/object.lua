@@ -1,25 +1,23 @@
-local __object__ = {
+__Object__ = {
     name = 'object'
 }
-setmetatable(__object__, {})
+setmetatable(__Object__, {})
 
-function __object__:__Clone__(obj)
+function __Object__.__Clone(source)
     local lookup_table = {}
-    local function _copy(o)
-        if type(o) ~= "table" then
-            return o
-        elseif lookup_table[o] then
-            return lookup_table[o]
+    local function _Copy(obj)
+        if type(obj) ~= "table" then
+            return obj
+        elseif lookup_table[obj] then
+            return lookup_table[obj]
         end
-        local new_table = {}
-        lookup_table[o] = new_table
-        for key, value in pairs(o) do
-            new_table[_copy(key)] = _copy(value)
+        local newObj = {}
+        lookup_table[obj] = newObj
+        for key, value in pairs(obj) do
+            newObj[_Copy(key)] = _Copy(value)
         end
-        return setmetatable(new_table, getmetatable(o))
+        return setmetatable(newObj, getmetatable(obj))
     end
 
-    return _copy(obj)
+    return _Copy(source)
 end
-
-return __object__

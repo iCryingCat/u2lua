@@ -1,2 +1,2 @@
-_CLS.AtlasManager = {}
-AtlasManager = __Class(_CLS.AtlasManager)
+AtlasManager = {}
+local property = __Class(AtlasManager)
