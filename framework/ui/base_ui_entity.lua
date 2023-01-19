@@ -1,50 +1,43 @@
-BaseUIEntity = {}
-local property = __Class(BaseUIEntity)
-property.controller = nil
-property.gameObject = nil
-property.transform = nil
+BaseUIEntity = __Class({
+    controller = 1,
+    gameObject = 2,
+    transform = 3
+})
 
-function property:Load()
+function BaseUIEntity:Load()
     self:BindComponentUnits()
     self:OnBindEvents()
     self:OnLoaded()
 end
 
-function property:Show()
+function BaseUIEntity:Show()
     self.gameObject:SetActive(true)
     self:OnShowed()
 end
 
-function property:Hide()
+function BaseUIEntity:Hide()
     self.gameObject:SetActive(false)
     self:OnHided()
 end
 
-function property:Close()
+function BaseUIEntity:Close()
     self:Hide()
     self:OnClosed()
 end
 
-function property:Dispose()
-    self:Close()
-    self:OnDisposed()
-end
-
-function property:GetComponentUnit(index)
+function BaseUIEntity:GetComponentUnit(index)
     return self.controller:GetComponentUnit(index).component
 end
 
-function property:BindComponentUnits() end
+function BaseUIEntity:BindComponentUnits() end
 
 -- ui生命周期函数
-function property:OnBindEvents() end
+function BaseUIEntity:OnBindEvents() end
 
-function property:OnLoaded() end
+function BaseUIEntity:OnLoaded() end
 
-function property:OnShowed() end
+function BaseUIEntity:OnShowed() end
 
-function property:OnHided() end
+function BaseUIEntity:OnHided() end
 
-function property:OnClosed() end
-
-function property:OnDisposed() end
+function BaseUIEntity:OnClosed() end
