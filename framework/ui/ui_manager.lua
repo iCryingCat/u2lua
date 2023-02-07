@@ -1,6 +1,3 @@
-require('u2lua/framework/ui/base_ui_entity')
-require('u2lua/framework/lib/res_manager')
-
 UIManager = {}
 
 UIManager.ShowUI = function(ui)
@@ -21,13 +18,14 @@ UIManager.NewUI = function(uiClass)
     local uiInstance = UIManager.LoadUIAsset(uiClass)
     local uiEntity = uiClass:__New()
     UIManager.BindEntityController(uiEntity, uiInstance)
+    UICanvas.PushUI(uiEntity)
     return uiEntity
 end
 
 UIManager.LoadUIAsset = function(uiClass)
-    local uiAssetPath = uiClass.pathAsset
-    local uiAsset = ResManager.LoadUI(uiAssetPath)
-    local uiInstance = ResManager.Instantiate(uiAsset)
+    local uiAssetSlug = uiClass.slug
+    local uiAsset = ResAllocator.LoadUI(uiAssetSlug)
+    local uiInstance = ResAllocator.Instantiate(uiAsset)
     return uiInstance;
 end
 

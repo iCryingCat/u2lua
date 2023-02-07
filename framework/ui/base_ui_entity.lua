@@ -1,7 +1,15 @@
+local UITag = {
+    layer = nil,
+    node = nil,
+    needMask = nil,
+    isSingleton = nil,
+}
+
 BaseUIEntity = __Class({
-    controller = 1,
-    gameObject = 2,
-    transform = 3
+    gameObject = nil,
+    transform = nil,
+    controller = nil,
+    uiTag = nil,
 })
 
 function BaseUIEntity:Load()
@@ -23,10 +31,6 @@ end
 function BaseUIEntity:Close()
     self:Hide()
     self:OnClosed()
-end
-
-function BaseUIEntity:GetComponentUnit(index)
-    return self.controller:GetComponentUnit(index).component
 end
 
 function BaseUIEntity:BindComponentUnits() end

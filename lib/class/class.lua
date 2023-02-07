@@ -1,9 +1,6 @@
-require("u2lua/base/type")
-require("u2lua/base/object")
-
 _CLS = {}
 
-__Class = function(t)
+function __Class(t)
     if t.__type == __Type__ then
         error("类型：" .. t .. "已定义！")
     end
